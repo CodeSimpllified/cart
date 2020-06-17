@@ -1,37 +1,15 @@
 import React from 'react';
 
-class CartItem extends React.Component{
-    increaseQuantity = () => {
-        this.setState((prevState) => {
-            return{
-                qty : prevState.qty + 1
-            }
-        });
-    }
-    decreaseQuantity = () => {
-        this.setState((prevState) => {
-            if(prevState.qty !== 0){
-                return {
-                    qty : prevState.qty - 1
-                }
-            }else{
-                return {
-                    qty : prevState.qty
-                }
-            }
-
-        });
-    }
-   render(){
-       const {price, title, qty, img} = this.props.product;
+const CartItem = (props) => {
+       const {price, title, qty, img} = props.product;
        const {product, 
         onIncreaseQuantity, 
         onDecreaseQuantity, 
-        onDeleteProduct} = this.props;
+        onDeleteProduct} = props;
        return(
            <div className="cart-item">
                <div className="left-block">
-                   <img style={styles.image} alt=""/>
+                   <img style={styles.image} src={img} alt=""/>
                </div>
                <div className="right-block">
                     <div style={{fontsize: 25}}>{title}</div>
@@ -43,13 +21,13 @@ class CartItem extends React.Component{
                         alt="increase" 
                         className="action-icons" 
                         src="https://image.flaticon.com/icons/svg/992/992651.svg" 
-                        onClick={() => onIncreaseQuantity(this.props.product)}
+                        onClick={() => onIncreaseQuantity(product)}
                         />
                         <img
                         alt="decrease" 
                         className="action-icons" 
                         src="https://image.flaticon.com/icons/svg/1665/1665612.svg" 
-                        onClick={() => onDecreaseQuantity(this.props.product)}
+                        onClick={() => onDecreaseQuantity(product)}
                         />
                         <img
                         alt="delete" 
@@ -61,7 +39,6 @@ class CartItem extends React.Component{
                 </div>
             </div>
        );
-   } 
 }
 const styles = {
     image: {
